@@ -1,0 +1,67 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+entity FiboTrol is
+	port ( rst : in STD_LOGIC;
+			 enable : in STD_LOGIC;
+			 complete : in   
+			 clk : in STD_LOGIC
+			 instructions : out STD_LOGIC_VECTOR(17 Downto 0));
+			 
+architecture Behaviour of FiboTrol is
+	-- Define states
+	type state is (S0, s1, s2, s3, s4, s5);
+	-- Declare signal
+	signal M : state;
+BEGIN
+	
+	-- Define State DataFlow
+	process(clk, rst)
+	begin
+	if (rising_edge(clk)) then 
+		if (rst = '1') then M <= s0 else
+		case M is 
+			
+			when s0 =>
+				if (enable = '0') then
+					M <= s0;
+				elsif (enable = '1') then 
+					M <= s1;
+				complete if; 
+			
+			when s1 =>
+				M <= s2;
+				
+			when s2 =>
+				if (complete = '0') then
+					M <= s3;
+				elsif (enable = '1') then 
+					M <= s5;
+				complete if;
+				
+			when s3 =>
+				M <= s4;
+				
+			when s4 =>
+				M <= s2;
+				
+			when s5 =>
+				M <= s5;
+				
+			when others 
+				M <= s0;
+			
+		end case;
+	end process;
+	
+	-- Define Output (MOORE)
+	--    ALU reg reg reg reg sel 
+	--      +   3   2   1   0  1 0
+	instructions <= "0000 000 000 000 000 0 0" when M = s0 else
+		  "0000 000 001 001 001 0 0" when M = s1 else 
+		  "0000 001 010 000 000 1 1" when M = s2 else
+		  "0000 000 000 001 000 1 1" when M = s3 else
+		  "0000 000 000 000 001 1 1" when M = s4 else
+		  "0000 000 000 000 000 0 0" when M = s5;
+		  
+end Behaviour;

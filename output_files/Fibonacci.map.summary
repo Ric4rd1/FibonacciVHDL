@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Mon Apr 29 10:07:13 2024
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : Fibonacci
+Top-level Entity Name : FiboPath1
+Family : MAX 10
+Total logic elements : 134
+    Total combinational functions : 110
+    Dedicated logic registers : 48
+Total registers : 48
+Total pins : 36
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0
